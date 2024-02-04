@@ -1,4 +1,4 @@
-let connection = mysql.createConnection({
+module.exports = {
     HOST: "localhost",
     USER: "root",
     PASSWORD: "",
@@ -10,14 +10,5 @@ let connection = mysql.createConnection({
       acquire: 30000,
       idle: 10000
     }
-  });
+  };
 
-connection.connect(function (err, connection) {
-  if (err) {
-    console.log("Error connecting");
-  } else {
-    console.log("Connected");
-  }
-})
-
-module.exports = connection;

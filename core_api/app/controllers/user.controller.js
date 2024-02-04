@@ -23,7 +23,23 @@ exports.findone = (req, res)=> {
 }
 
 exports.create = (req, res)=> {
-    
+    if (!req.body.user) {
+        res.status(400).send({
+            message: "Content cannot be empty"
+        });
+        return;
+    }
+    const user = {
+    user : req.body.user, 
+    password : req.body.password
+    };
+    user.create(user).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message : "database error when inserting"
+        })
+    })
 }
 
 exports.update = (req, res)=> {

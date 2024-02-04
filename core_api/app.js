@@ -1,9 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+var corsoptions = {origin: 'http://localhost:8080'};
 app.use(express.json());
-const db = require('./app/models');
-db.sequelize.sync();
-const PORT = process.env.PORT || 3000;
+app.use(express.urlencoded({ extended : true }));
+app.use(cors(corsoptions));
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, function() {
     console.log(`listening on port:${PORT}`); //
 })
@@ -21,3 +23,10 @@ app.get('/',(req, res) => {
         message: "Welcome to my website..."
     });
 });
+
+const db = require("./app/models");
+db.sequelize.sync().then(() => {
+    console.log("sync successful");
+}).catch((err) => {
+    console.log(err.message);
+})
