@@ -1,4 +1,4 @@
-import {users} from '../models/user.model.js';
+// import {users} from '../models/user.model.js';
 
 // export const showusers = (req, res)=> {
 //     users((err, results)=> {
@@ -107,5 +107,17 @@ exports.deleteone = (req, res)=> {
 }
 
 exports.deleteall = (req, res)=> {
-    
+    user.destroy({
+        where : {}, 
+        truncate : false
+    }).then(num => {
+            res.send({
+                message : "all users deleted"
+            });
+    })
+    .catch (err => {
+        res.status(500).send({
+            message : "database error when deleting users"
+        });
+    })
 }
