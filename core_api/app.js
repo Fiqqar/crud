@@ -8,7 +8,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended : true }));
 app.use(cors(corsoptions));
 const PORT = process.env.PORT || 8080;
-require("./app/routes/user.routes")(app);
+
+const db = require("./app/models");
+db.sequelize2.sync({
+    force: true,
+}).then(() => {
+    console.log("sync successful");
+}).catch((err) => {
+    console.log(err.message);
+})
+app.get('/',(req, res) => {
+    res.json({
+        message: "Welcome to my website..."
+    });
+});
+require("./app/routes/user.routes.js")(app);
 app.listen(PORT, function() {
     console.log(`listening on port:${PORT}`); //
 })
@@ -21,17 +35,6 @@ app.listen(PORT, function() {
 //     res.send(user);
 // });
 
-// app.get('/',(req, res) => {
-//     res.json({
-//         message: "Welcome to my website..."
-//     });
-// });
 
-const db = require("./app/models");
-db.sequelize2.sync({
-    force: true,
-}).then(() => {
-    console.log("sync successful");
-}).catch((err) => {
-    console.log(err.message);
-})
+
+
