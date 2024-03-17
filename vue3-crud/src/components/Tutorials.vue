@@ -36,7 +36,7 @@
         <div><label><strong>Title : </strong></label>{{ currentTutorial.title }}</div>
         <div><label><strong>Description : </strong></label>{{ currentTutorial.description }}</div>
         <div><label><strong>Status : </strong></label>{{ currentTutorial.published ?"published":"pending" }}</div>
-        <router-link :to="'/tutorials/' + currentTutorial.id" class="badge badge-warning">
+        <router-link :to="'/tutorials/' + currentTutorial.id" class="btn btn-warning btn-sm">
           Edit
         </router-link>
       </div>
@@ -89,7 +89,7 @@ export default {
     searchTitle() {
       tutorialDataServices.findbytitle(this.title).then (response => {
         this.tutorials = response.data;
-        this.refreshlist();
+        this.setActiveTutorial(null);
         console.log(response.data);
       }) 
       .catch(error => {

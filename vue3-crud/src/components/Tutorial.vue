@@ -8,16 +8,16 @@
             </div>
             <div class="form-group">
                 <label for="text">Description</label>
-                <input type="text" class="class-control" id="description" v-model="currentnews.description">
+                <!-- <input type="text" class="class-control" id="description" v-model="currentnews.description"> -->
             </div>
             <div class="form-group">
-                <label for="">Status : </label> {{ currentnews.published ? "published":"unpublished" }}
+                <!-- <label for="">Status : </label> {{ currentnews.published ? "published":"unpublished" }} -->
             </div>
         </form>
-        <button class="badge badge-primary mr-2" v-if="currentnews.published" @click="updatepublished(false)">Unpublish</button>
+        <!-- <button class="badge badge-primary mr-2" v-if="currentnews.published" @click="updatepublished(false)">Unpublish</button>
         <button class="badge badge-primary mr-2" v-else @click="updatepublished(true)">Publish</button>
         <button class="badge badge-danger mr-2" @click="deletenews">Delete News</button>
-        <button class="badge badge-success mr-2" @click="updatenews">Update News</button>
+        <button class="badge badge-success mr-2" @click="updatenews">Update News</button> -->
         <p>{{ message }}</p>
     </div>
 </template>
@@ -36,7 +36,7 @@ export default {
             TutorialDataServices.get(id)
             .then (response => {
                 this.currentnews = response.data;
-                console.log(response.data);
+                console.log("hello");
             }).catch(err => {
                 console.log(err);
             });
@@ -76,7 +76,7 @@ export default {
         }
     },
     mounted() {
-        this.getnews(this.$route.params.id);
+        this.getnews(1);
     },
 }
 </script>
